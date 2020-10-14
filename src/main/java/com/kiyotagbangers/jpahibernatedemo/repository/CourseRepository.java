@@ -49,7 +49,7 @@ public class CourseRepository {
         em.flush(); // INSERT statement execute
 
         // course2 is no longer tracked by the entity manager
-         em.detach(course2);
+        em.detach(course2);
 
         // it's not managing anything at this point
         // so what it changes you make are not reflected in the DB
@@ -57,6 +57,7 @@ public class CourseRepository {
         // em.clear();
 
         course1.setName("Web Services - Updated");
+        // course1.setName(null); // not null field
         course2.setName("JS practice - Updated");
 
         // the contents of course1 alone would be refreshed and get the data from the database(UPDATE statement didn't execute)

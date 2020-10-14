@@ -1,17 +1,28 @@
 package com.kiyotagbangers.jpahibernatedemo.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
+//@Table(name = "CourseDetails")
 public class Course {
 
     @Id
     @GeneratedValue
     private Long id;
 
+//    @Column(name = "fullname", nullable = false)
     private String name;
+
+    @CreationTimestamp
+    private LocalDateTime createdDate;
+
+    @UpdateTimestamp
+    private LocalDateTime lastUpdatedDate;
+
 
     // default no args constructor
     protected Course(){
