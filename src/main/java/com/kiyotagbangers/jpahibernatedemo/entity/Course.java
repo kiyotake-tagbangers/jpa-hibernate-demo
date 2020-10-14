@@ -8,6 +8,12 @@ import java.time.LocalDateTime;
 
 @Entity
 //@Table(name = "CourseDetails")
+@NamedQueries(
+        value = {
+                @NamedQuery(name = "query_get_all_courses", query = "Select c from Course c"),
+                @NamedQuery(name = "query_get_all_updated_courses", query = "Select c from Course c where name like '% Updated'")
+        }
+)
 public class Course {
 
     @Id

@@ -35,7 +35,8 @@ class JPQLTest {
     @Test
     public void jpql_typed() {
         // Type queries are always better to make it easy to read your program
-        TypedQuery<Course> query = em.createQuery("Select c from Course c", Course.class);
+        // TypedQuery<Course> query = em.createQuery("Select c from Course c", Course.class);
+        TypedQuery<Course> query = em.createNamedQuery("query_get_all_courses", Course.class);
 
         // It makes very clear what results you are expecting back
         List<Course> resultList = query.getResultList();
@@ -45,7 +46,8 @@ class JPQLTest {
     @Test
     public void jpql_where() {
         // Type queries are always better to make it easy to read your program
-        TypedQuery<Course> query = em.createQuery("Select c from Course c where name like '% Updated'", Course.class);
+        // TypedQuery<Course> query = em.createQuery("Select c from Course c where name like '% Updated'", Course.class);
+        TypedQuery<Course> query = em.createNamedQuery("query_get_all_updated_courses", Course.class);
 
         // It makes very clear what results you are expecting back
         List<Course> resultList = query.getResultList();
