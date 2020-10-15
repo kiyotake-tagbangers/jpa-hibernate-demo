@@ -2,6 +2,7 @@ package com.kiyotagbangers.jpahibernatedemo;
 
 import com.kiyotagbangers.jpahibernatedemo.entity.Course;
 import com.kiyotagbangers.jpahibernatedemo.repository.CourseRepository;
+import com.kiyotagbangers.jpahibernatedemo.repository.StudentRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,10 @@ public class JpaHibernateDemoApplication implements CommandLineRunner {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
-	private CourseRepository repository;
+	private CourseRepository courseRepository;
+
+	@Autowired
+	private StudentRepository studentRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(JpaHibernateDemoApplication.class, args);
@@ -23,11 +27,12 @@ public class JpaHibernateDemoApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-//		Course course = repository.findById(10001L);
-//		logger.info("Course 10001 -> {}", course);
+		// Course course = courseRepository.findById(10001L);
+		// logger.info("Course 10001 -> {}", course);
 
-//		repository.save(new Course("Microservices practice"));
-//		repository.deleteById(10001L);
-		repository.playWithEntityManager();
+		// courseRepository.save(new Course("Microservices practice"));
+		// courseRepository.deleteById(10001L);
+		// courseRepository.playWithEntityManager();
+		studentRepository.saveStudentWithPassport();
 	}
 }
