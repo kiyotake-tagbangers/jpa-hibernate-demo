@@ -28,6 +28,7 @@ class CourseRepositoryTest {
     }
 
     @Test
+    @DirtiesContext
     void save_basic() {
         Course course = repository.findById(10002L);
         assertEquals("Spring practice", course.getName());
@@ -45,6 +46,7 @@ class CourseRepositoryTest {
     }
 
     @Test
+    @DirtiesContext
     void playWithEntityManager() {
         repository.playWithEntityManager();
     }
