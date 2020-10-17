@@ -5,6 +5,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 //@Table(name = "CourseDetails")
@@ -22,6 +23,9 @@ public class Course {
 
 //    @Column(name = "fullname", nullable = false)
     private String name;
+
+    @OneToMany(mappedBy = "course")
+    private List<Review> reviews;
 
     @CreationTimestamp
     private LocalDateTime createdDate;
@@ -48,6 +52,18 @@ public class Course {
 
     public Long getId() {
         return id;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void addReviews(Review reviews) {
+        this.reviews.add(reviews);
+    }
+
+    public void removeReviews(Review reviews) {
+        this.reviews.remove(reviews);
     }
 
     @Override

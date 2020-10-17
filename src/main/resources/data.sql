@@ -15,11 +15,16 @@ INSERT INTO student(id, name, passport_id) VALUES(20001,'Yamada', 30001);
 INSERT INTO student(id, name, passport_id) VALUES(20002,'Tanaka', 30002);
 INSERT INTO student(id, name, passport_id) VALUES(20003,'Sato', 30003);
 -- SELECT * FROM STUDENT ,PASSPORT WHERE STUDENT.PASSPORT_ID=PASSPORT.ID;
---   ID  	NAME  	PASSPORT_ID  	ID  	NUMBER
---   20001	Yamada	30001	30001	A123456
---   20002	Tanaka	30002	30002	B123456
---   20003	Sato	30003	30003	C123456
+-- ID  	NAME  	PASSPORT_ID  	ID  	NUMBER
+-- 20001	Yamada	30001	30001	A123456
+-- 20002	Tanaka	30002	30002	B123456
+-- 20003	Sato	30003	30003	C123456
 
-INSERT INTO review(id, rating, description) VALUES(40001,'5','Great Course');
-INSERT INTO review(id, rating, description) VALUES(40002,'4','Wonderful Course');
-INSERT INTO review(id, rating, description) VALUES(40003,'3 ','Awesome Course');
+INSERT INTO review(id, rating, description, course_id) VALUES(40001,'5','Great Course', 10001);
+INSERT INTO review(id, rating, description, course_id) VALUES(40002,'4','Wonderful Course', 10001);
+INSERT INTO review(id, rating, description, course_id) VALUES(40003,'3 ','Awesome Course', 10003);
+-- SELECT * FROM review, course WHERE course.id = review.course_id;
+-- ID  	DESCRIPTION  	RATING  	COURSE_ID  	ID  	CREATED_DATE  	LAST_UPDATED_DATE  	NAME
+-- 40001	Great Course	5	10001	10001	2020-10-16 00:00:00	2020-10-16 00:00:00	JPA practice
+-- 40002	Wonderful Course	4	10001	10001	2020-10-16 00:00:00	2020-10-16 00:00:00	JPA practice
+-- 40003	Awesome Course	3 	10003	10003	2020-10-16 00:00:00	2020-10-16 00:00:00	Spring Boot practice

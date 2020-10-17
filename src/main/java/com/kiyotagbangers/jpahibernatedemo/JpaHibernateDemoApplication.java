@@ -13,26 +13,29 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class JpaHibernateDemoApplication implements CommandLineRunner {
 
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@Autowired
-	private CourseRepository courseRepository;
+    @Autowired
+    private CourseRepository courseRepository;
 
-	@Autowired
-	private StudentRepository studentRepository;
+    @Autowired
+    private StudentRepository studentRepository;
 
-	public static void main(String[] args) {
-		SpringApplication.run(JpaHibernateDemoApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(JpaHibernateDemoApplication.class, args);
+    }
 
-	@Override
-	public void run(String... args) throws Exception {
-		// Course course = courseRepository.findById(10001L);
-		// logger.info("Course 10001 -> {}", course);
+    @Override
+    public void run(String... args) throws Exception {
+        // Course course = courseRepository.findById(10001L);
+        // logger.info("Course 10001 -> {}", course);
 
-		// courseRepository.save(new Course("Microservices practice"));
-		// courseRepository.deleteById(10001L);
-		// courseRepository.playWithEntityManager();
-		studentRepository.saveStudentWithPassport();
-	}
+        // courseRepository.save(new Course("Microservices practice"));
+        // courseRepository.deleteById(10001L);
+        // courseRepository.playWithEntityManager();
+
+        // studentRepository.saveStudentWithPassport();
+
+        courseRepository.addReviewsForCourse();
+    }
 }
