@@ -53,4 +53,28 @@ class StudentRepositoryTest {
     void someTest() {
         repository.someOperationToUnderstandPersistenceContext();
     }
+
+    @Test
+    @Transactional // entire test is within a transaction
+    void retrieveStudentAndCourses() {
+        Student student = em.find(Student.class, 20001L);
+        logger.info("student -> {}", student);
+        logger.info("courses -> {}", student.getCourses());
+        // LAZY fetch(ManyToMany default fetch strategy)
+        //     select
+        //        courses0_.student_id as student_1_5_0_,
+        //        courses0_.course_id as course_i2_5_0_,
+        //        course1_.id as id1_0_1_,
+        //        course1_.created_date as created_2_0_1_,
+        //        course1_.last_updated_date as last_upd3_0_1_,
+        //        course1_.name as name4_0_1_
+        //    from
+        //        student_course courses0_
+        //    inner join
+        //        course course1_
+        //            on courses0_.course_id=course1_.id
+        //    where
+        //        courses0_.student_id=?
+        //2020-10-18 11:20:39.853  INFO 2953 --- [           main] c.k.j.repository.StudentRepositoryTest   : courses -> [Course{name='JPA practice'}, Course{name='Spring Boot practice'}]
+    }
 }
