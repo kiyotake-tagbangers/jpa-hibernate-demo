@@ -1,6 +1,7 @@
 package com.kiyotagbangers.jpahibernatedemo;
 
 import com.kiyotagbangers.jpahibernatedemo.entity.Course;
+import com.kiyotagbangers.jpahibernatedemo.entity.Review;
 import com.kiyotagbangers.jpahibernatedemo.repository.CourseRepository;
 import com.kiyotagbangers.jpahibernatedemo.repository.StudentRepository;
 import org.slf4j.Logger;
@@ -9,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootApplication
 public class JpaHibernateDemoApplication implements CommandLineRunner {
@@ -36,6 +40,11 @@ public class JpaHibernateDemoApplication implements CommandLineRunner {
 
         // studentRepository.saveStudentWithPassport();
 
-        courseRepository.addReviewsForCourse();
+        // courseRepository.addHardcodedReviewsForCourse();
+        List<Review> reviews = new ArrayList<>();
+        reviews.add(new Review("5", "Great Hands-on"));
+        reviews.add(new Review("5", "Hotsoff"));
+
+        courseRepository.addReviewsForCourse(10003L, reviews);
     }
 }
