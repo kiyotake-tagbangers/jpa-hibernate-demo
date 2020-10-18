@@ -30,8 +30,8 @@ public class Course {
 
     // default fetch strategy is LAZY
     // student_courses would become the join table between the student and the course
-    @ManyToMany
-    private List<Student> students;
+    @ManyToMany(mappedBy = "courses")
+    private List<Student> students = new ArrayList<>();
 
     @CreationTimestamp
     private LocalDateTime createdDate;

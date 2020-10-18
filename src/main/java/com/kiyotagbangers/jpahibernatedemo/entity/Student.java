@@ -1,6 +1,7 @@
 package com.kiyotagbangers.jpahibernatedemo.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,7 +22,7 @@ public class Student {
             joinColumns = @JoinColumn(name = "STUDENT_ID"),
             inverseJoinColumns = @JoinColumn(name = "COURSE_ID")
     )
-    private List<Course> courses;
+    private List<Course> courses = new ArrayList<>();
     //     create table student_course (
     //       student_id bigint not null,
     //        course_id bigint not null
