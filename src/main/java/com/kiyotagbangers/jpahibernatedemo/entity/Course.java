@@ -28,12 +28,16 @@ public class Course {
     @OneToMany(mappedBy = "course")
     private List<Review> reviews;
 
+    // default fetch strategy is LAZY
+    // student_courses would become the join table between the student and the course   
+    @ManyToMany
+    private List<Student> students;
+
     @CreationTimestamp
     private LocalDateTime createdDate;
 
     @UpdateTimestamp
     private LocalDateTime lastUpdatedDate;
-
 
     // default no args constructor
     protected Course(){
@@ -65,6 +69,14 @@ public class Course {
 
     public void removeReviews(Review reviews) {
         this.reviews.remove(reviews);
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void addStudents(Student students) {
+        this.students.add(students);
     }
 
     @Override

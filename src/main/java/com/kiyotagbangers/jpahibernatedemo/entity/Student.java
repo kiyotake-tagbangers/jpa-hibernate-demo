@@ -1,6 +1,7 @@
 package com.kiyotagbangers.jpahibernatedemo.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Student {
@@ -14,6 +15,28 @@ public class Student {
 
     @OneToOne(fetch = FetchType.LAZY)
     private Passport passport;
+
+    @ManyToMany
+    @JoinTable(name = "STUDENT_COURSE",
+            joinColumns = @JoinColumn(name = "STUDENT_ID"),
+            inverseJoinColumns = @JoinColumn(name = "COURSE_ID")
+    )
+    private List<Course> courses;
+    //     create table student_course (
+    //       student_id bigint not null,
+    //        course_id bigint not null
+    //    )
+
+    //     alter table student_course
+    //       add constraint FKejrkh4gv8iqgmspsanaji90ws
+    //       foreign key (course_id)
+    //       references course
+
+    //     alter table student_course
+    //       add constraint FKq7yw2wg9wlt2cnj480hcdn6dq
+    //       foreign key (student_id)
+    //       references student
+
 
     public Student() {
     }
@@ -40,6 +63,14 @@ public class Student {
 
     public void setPassport(Passport passport) {
         this.passport = passport;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void addCourses(Course courses) {
+        this.courses.add(courses);
     }
 
     @Override
