@@ -4,8 +4,9 @@ import javax.persistence.*;
 
 @Entity
 // @Inheritance(strategy = InheritanceType.SINGLE_TABLE) // Default strategy.All subclasses are mapped to one table
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)  // Individual table will be created for per concrete entity class
-@DiscriminatorColumn(name = "EmployeeType")
+// @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)  // Individual table will be created for per concrete entity class
+@Inheritance(strategy = InheritanceType.JOINED)
+// @DiscriminatorColumn(name = "EmployeeType")
 public abstract class Employee {
 
     @Id
