@@ -5,6 +5,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,10 +22,12 @@ public class Course {
     @GeneratedValue
     private Long id;
 
-//    @Column(name = "fullname", nullable = false)
+    // @Column(name = "fullname", nullable = false)
     private String name;
 
     // default fetch strategy is LAZY
+    // mappedBy use non-own side entity
+    // @ManyToOne field name(owns the relationship) specify
     @OneToMany(mappedBy = "course")
     private List<Review> reviews;
 
@@ -75,8 +78,8 @@ public class Course {
         return students;
     }
 
-    public void addStudents(Student students) {
-        this.students.add(students);
+    public void addStudent(Student student) {
+        this.students.add(student);
     }
 
     @Override

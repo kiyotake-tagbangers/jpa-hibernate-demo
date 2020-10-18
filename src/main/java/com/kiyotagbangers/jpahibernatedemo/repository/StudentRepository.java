@@ -1,5 +1,6 @@
 package com.kiyotagbangers.jpahibernatedemo.repository;
 
+import com.kiyotagbangers.jpahibernatedemo.entity.Course;
 import com.kiyotagbangers.jpahibernatedemo.entity.Passport;
 import com.kiyotagbangers.jpahibernatedemo.entity.Student;
 import org.slf4j.Logger;
@@ -66,5 +67,23 @@ public class StudentRepository {
         student.setName("Yamada - updated");
 
         // Persistence Context is killed as the transaction is ended
+    }
+
+    public void insertHardcodedStudentAndCourse(){
+        Student student = new Student("Tanakayama");
+        Course course = new Course("Microservices");
+        em.persist(student);
+        em.persist(course);
+        student.addCourses(course);
+        course.addStudent(student);
+
+        // owning side
+        em.persist(student);
+    }
+    public void insertStudentAndCourse(Student student, Course course){
+        student.addCourses(course);
+        course.addStudent(student);
+        em.persist(student);
+        em.persist(course);
     }
 }
