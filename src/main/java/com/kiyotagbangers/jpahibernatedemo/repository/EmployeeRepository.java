@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.MappedSuperclass;
 import java.util.List;
 
 @Repository
@@ -25,9 +26,18 @@ public class EmployeeRepository {
         em.persist(employee);
     }
 
+    // comment-out when @MappedSuperclass uses
     // retrieve all employees
-    public List<Employee> retrieveAllEmployees(){
-        return em.createQuery("select e from Employee e", Employee.class).getResultList();
+    // public List<Employee> retrieveAllEmployees(){
+        // return em.createQuery("select e from Employee e", Employee.class).getResultList();
+    // }
+
+    public List<Employee> retrieveAllPartTimeEmployees(){
+        return em.createQuery("select e from PartTimeEmployee e", Employee.class).getResultList();
+    }
+
+    public List<Employee> retrieveFullPartTimeEmployees(){
+        return em.createQuery("select e from FullTimeEmployee e", Employee.class).getResultList();
     }
 
     public Course findById(Long id){

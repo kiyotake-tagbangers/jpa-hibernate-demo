@@ -58,6 +58,9 @@ public class JpaHibernateDemoApplication implements CommandLineRunner {
         employeeRepository.insert(new FullTimeEmployee("Yoshikawa", new BigDecimal("10000")));
         employeeRepository.insert(new PartTimeEmployee("Yamakawa", new BigDecimal("50")));
 
-        logger.info("All Employees -> {}", employeeRepository.retrieveAllEmployees());
+        // comment-out when @MappedSuperclass uses
+        // logger.info("All Employees -> {}", employeeRepository.retrieveAllEmployees());
+        logger.info("All Employees -> {}", employeeRepository.retrieveAllPartTimeEmployees());
+        logger.info("All Employees -> {}", employeeRepository.retrieveFullPartTimeEmployees());
     }
 }
