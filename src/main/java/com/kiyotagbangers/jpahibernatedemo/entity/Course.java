@@ -24,6 +24,7 @@ public class Course {
 //    @Column(name = "fullname", nullable = false)
     private String name;
 
+    // default fetch strategy is LAZY
     @OneToMany(mappedBy = "course")
     private List<Review> reviews;
 

@@ -13,6 +13,7 @@ public class Review {
 
     private String description;
 
+    // default fetch strategy is EAGER
     // Many of the reviews are associated with one course
     @ManyToOne
     private Course course;

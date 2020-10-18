@@ -2,6 +2,7 @@ package com.kiyotagbangers.jpahibernatedemo.repository;
 
 import com.kiyotagbangers.jpahibernatedemo.JpaHibernateDemoApplication;
 import com.kiyotagbangers.jpahibernatedemo.entity.Course;
+import com.kiyotagbangers.jpahibernatedemo.entity.Review;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -9,6 +10,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.EntityManager;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,6 +23,9 @@ class CourseRepositoryTest {
 
     @Autowired
     CourseRepository repository;
+
+    @Autowired
+    EntityManager em;
 
     @Test
     public void findById_basic() {
@@ -49,5 +56,98 @@ class CourseRepositoryTest {
     @DirtiesContext
     void playWithEntityManager() {
         repository.playWithEntityManager();
+    }
+
+    @Test
+    @Transactional
+    void retrieveReviewsForCourse() {
+        Course course = repository.findById(10001L);
+        // EAGER fetch
+        // select
+        //    course0_.id as id1_0_0_,
+        //    course0_.created_date as created_2_0_0_,
+        //    course0_.last_updated_date as last_upd3_0_0_,
+        //    course0_.name as name4_0_0_,
+        //    reviews1_.course_id as course_i4_2_1_,
+        //    reviews1_.id as id1_2_1_,
+        //    reviews1_.id as id1_2_2_,
+        //    reviews1_.course_id as course_i4_2_2_,
+        //    reviews1_.description as descript2_2_2_,
+        //    reviews1_.rating as rating3_2_2_
+        //from
+        //    course course0_
+        //left outer join
+        //    review reviews1_
+        //        on course0_.id=reviews1_.course_id
+        //where
+        //    course0_.id=?select
+        //    course0_.id as id1_0_0_,
+        //    course0_.created_date as created_2_0_0_,
+        //    course0_.last_updated_date as last_upd3_0_0_,
+        //    course0_.name as name4_0_0_,
+        //    reviews1_.course_id as course_i4_2_1_,
+        //    reviews1_.id as id1_2_1_,
+        //    reviews1_.id as id1_2_2_,
+        //    reviews1_.course_id as course_i4_2_2_,
+        //    reviews1_.description as descript2_2_2_,
+        //    reviews1_.rating as rating3_2_2_
+        //from
+        //    course course0_
+        //left outer join
+        //    review reviews1_
+        //        on course0_.id=reviews1_.course_id
+        //where
+        //    course0_.id=?
+
+        // LAZY fetch (@OneToMany default behavior)
+        //     select
+        //        course0_.id as id1_0_0_,
+        //        course0_.created_date as created_2_0_0_,
+        //        course0_.last_updated_date as last_upd3_0_0_,
+        //        course0_.name as name4_0_0_
+        //    from
+        //        course course0_
+        //    where
+        //        course0_.id=?
+
+        // if there is no @Transactional, LazyInitializationException occur
+        // failed to lazily initialize a collection of role: com.kiyotagbangers.jpahibernatedemo.entity.Course.reviews, could not initialize proxy - no Session
+        // LAZY fetch (@OneToMany default behavior)
+        //     select
+        //        reviews0_.course_id as course_i4_2_0_,
+        //        reviews0_.id as id1_2_0_,
+        //        reviews0_.id as id1_2_1_,
+        //        reviews0_.course_id as course_i4_2_1_,
+        //        reviews0_.description as descript2_2_1_,
+        //        reviews0_.rating as rating3_2_1_
+        //    from
+        //        review reviews0_
+        //    where
+        //        reviews0_.course_id=?
+        logger.info("{}", course.getReviews());
+    }
+
+    @Test
+    @Transactional
+    void retrieveCourseForReview() {
+        Review review = em.find(Review.class, 40001L);
+        // EAGER fetch(@ManyToOne default behavior)
+        //     select
+        //        review0_.id as id1_2_0_,
+        //        review0_.course_id as course_i4_2_0_,
+        //        review0_.description as descript2_2_0_,
+        //        review0_.rating as rating3_2_0_,
+        //        course1_.id as id1_0_1_,
+        //        course1_.created_date as created_2_0_1_,
+        //        course1_.last_updated_date as last_upd3_0_1_,
+        //        course1_.name as name4_0_1_
+        //    from
+        //        review review0_
+        //    left outer join
+        //        course course1_
+        //            on review0_.course_id=course1_.id
+        //    where
+        //        review0_.id=?
+        logger.info("{}", review.getCourse());
     }
 }
