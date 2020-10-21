@@ -2,20 +2,17 @@ package com.kiyotagbangers.jpahibernatedemo.repository;
 
 import com.kiyotagbangers.jpahibernatedemo.JpaHibernateDemoApplication;
 import com.kiyotagbangers.jpahibernatedemo.entity.Course;
-import com.kiyotagbangers.jpahibernatedemo.entity.Review;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.transaction.annotation.Transactional;
-
-import javax.persistence.EntityManager;
+import org.springframework.data.domain.Sort;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest(classes = JpaHibernateDemoApplication.class)
 class CourseSpringDataRepositoryTest {
@@ -73,5 +70,24 @@ class CourseSpringDataRepositoryTest {
 
         logger.info("Count -> {}", repository.count());
         // Count -> 4
+    }
+
+    @Test
+    void sort() {
+        Sort sort = Sort.by(Sort.Direction.ASC, "name");
+        logger.info("Sorted Courses -> {}", repository.findAll(sort));
+        //     select
+        //        course0_.id as id1_0_,
+        //        course0_.created_date as created_2_0_,
+        //        course0_.last_updated_date as last_upd3_0_,
+        //        course0_.name as name4_0_
+        //    from
+        //        course course0_
+        //    order by
+        //        course0_.name desc
+        // Sorted Courses -> [Course{name='JPA exercise'}, Course{name='Spring Boot practice'}, Course{name='Spring practice'}]
+
+        logger.info("Count -> {}", repository.count());
+        // Count -> 3
     }
 }
