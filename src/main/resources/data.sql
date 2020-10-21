@@ -1,4 +1,4 @@
-INSERT INTO course(id, name, created_date, last_updated_date) VALUES(10001, 'JPA practice', sysdate(), sysdate());
+INSERT INTO course(id, name, created_date, last_updated_date) VALUES(10001, 'JPA exercise', sysdate(), sysdate());
 INSERT INTO course(id, name, created_date, last_updated_date) VALUES(10002, 'Spring practice', sysdate(), sysdate());
 INSERT INTO course(id, name, created_date, last_updated_date) VALUES(10003, 'Spring Boot practice', sysdate(), sysdate());
 
