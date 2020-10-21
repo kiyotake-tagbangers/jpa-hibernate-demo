@@ -7,6 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import java.util.Optional;
@@ -89,5 +92,18 @@ class CourseSpringDataRepositoryTest {
 
         logger.info("Count -> {}", repository.count());
         // Count -> 3
+    }
+
+    @Test
+    void pagination() {
+        PageRequest pageRequest = PageRequest.of(0, 3);
+        Page<Course> firstPage = repository.findAll(pageRequest);
+        logger.info("First Page -> {}", firstPage.getContent());
+        // First Page -> [Course{name='JPA exercise'}, Course{name='Spring practice'}, Course{name='Spring Boot practice'}]
+
+        Pageable secondPageable = firstPage.nextPageable();
+        Page<Course> secondPage = repository.findAll(secondPageable);
+        logger.info("Second Page -> {}", secondPage.getContent());
+        // Second Page -> [Course{name='Dummy1'}, Course{name='Dummy2'}, Course{name='Dummy3'}]
     }
 }
