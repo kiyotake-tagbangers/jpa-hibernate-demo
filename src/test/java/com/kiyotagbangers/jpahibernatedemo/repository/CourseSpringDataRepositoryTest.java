@@ -36,4 +36,42 @@ class CourseSpringDataRepositoryTest {
         Optional<Course> courseOptional = repository.findById(20001L);
         assertFalse(courseOptional.isPresent());
     }
+
+    @Test
+    void playingAroundWithSpringDataRepository() {
+        Course course = new Course("Microservices practice");
+        repository.save(course);
+        //     insert
+        //    into
+        //        course
+        //        (created_date, last_updated_date, name, id)
+        //    values
+        //        (?, ?, ?, ?)
+
+        course.setName("Microservices practice - Updated");
+        repository.save(course);
+        //     select
+        //        course0_.id as id1_0_0_,
+        //        course0_.created_date as created_2_0_0_,
+        //        course0_.last_updated_date as last_upd3_0_0_,
+        //        course0_.name as name4_0_0_
+        //    from
+        //        course course0_
+        //    where
+        //        course0_.id=?
+
+        //     update
+        //        course
+        //    set
+        //        created_date=?,
+        //        last_updated_date=?,
+        //        name=?
+        //    where
+        //        id=?
+        logger.info("Courses -> {}", repository.findAll());
+        // Courses -> [Course{name='Microservices practice - Updated'}, Course{name='JPA exercise'}, Course{name='Spring practice'}, Course{name='Spring Boot practice'}]
+
+        logger.info("Count -> {}", repository.count());
+        // Count -> 4
+    }
 }
