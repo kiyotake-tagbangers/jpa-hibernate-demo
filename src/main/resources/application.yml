@@ -7,6 +7,8 @@ spring:
       hibernate:
         generate_statistics: true
         format_sql: true
+        connection:
+          isolation: 2
     show-sql: true
   datasource:
     url: jdbc:h2:mem:testdb
