@@ -101,9 +101,25 @@ class CourseSpringDataRepositoryTest {
         logger.info("First Page -> {}", firstPage.getContent());
         // First Page -> [Course{name='JPA exercise'}, Course{name='Spring practice'}, Course{name='Spring Boot practice'}]
 
-        Pageable secondPageable = firstPage.nextPageable();
-        Page<Course> secondPage = repository.findAll(secondPageable);
-        logger.info("Second Page -> {}", secondPage.getContent());
+        // Pageable secondPageable = firstPage.nextPageable();
+        // Page<Course> secondPage = repository.findAll(secondPageable);
+        // logger.info("Second Page -> {}", secondPage.getContent());
         // Second Page -> [Course{name='Dummy1'}, Course{name='Dummy2'}, Course{name='Dummy3'}]
+    }
+
+    @Test
+    void findUsingName() {
+        logger.info("FindByName -> {}", repository.findByName("JPA exercise"));
+        //     select
+        //        course0_.id as id1_0_,
+        //        course0_.created_date as created_2_0_,
+        //        course0_.last_updated_date as last_upd3_0_,
+        //        course0_.name as name4_0_
+        //    from
+        //        course course0_
+        //    where
+        //        course0_.name=?
+        //2020-10-22 08:41:11.104 TRACE 14321 --- [           main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [JPA exercise]
+        //  FindByName -> [Course{name='JPA exercise'}]
     }
 }

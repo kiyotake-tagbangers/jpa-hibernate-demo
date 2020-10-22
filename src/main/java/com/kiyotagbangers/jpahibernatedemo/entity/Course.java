@@ -1,5 +1,6 @@
 package com.kiyotagbangers.jpahibernatedemo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -13,7 +14,8 @@ import java.util.List;
 @NamedQueries(
         value = {
                 @NamedQuery(name = "query_get_all_courses", query = "Select c from Course c"),
-                @NamedQuery(name = "query_get_all_updated_courses", query = "Select c from Course c where name like '% Updated'")
+                @NamedQuery(name = "query_get_all_updated_courses", query = "Select c from Course c where name like '% Updated'"),
+                @NamedQuery(name = "query_get_practice_courses", query = "Select c From Course c where name like '% practice'")
         }
 )
 public class Course {
@@ -34,6 +36,7 @@ public class Course {
     // default fetch strategy is LAZY
     // student_courses would become the join table between the student and the course
     @ManyToMany(mappedBy = "courses")
+    @JsonIgnore
     private List<Student> students = new ArrayList<>();
 
     @CreationTimestamp
@@ -43,7 +46,7 @@ public class Course {
     private LocalDateTime lastUpdatedDate;
 
     // default no args constructor
-    protected Course(){
+    protected Course() {
     }
 
     public Course(String name) {
