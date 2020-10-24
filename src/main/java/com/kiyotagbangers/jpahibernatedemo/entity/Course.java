@@ -16,8 +16,9 @@ import java.util.List;
 @NamedQueries(
         value = {
                 @NamedQuery(name = "query_get_all_courses", query = "Select c from Course c"),
+                @NamedQuery(name = "query_get_all_courses_join_fetch", query = "Select c from Course c join fetch c.students"),
                 @NamedQuery(name = "query_get_all_updated_courses", query = "Select c from Course c where name like '% Updated'"),
-                @NamedQuery(name = "query_get_practice_courses", query = "Select c From Course c where name like '% practice'")
+                @NamedQuery(name = "query_get_practice_courses", query = "Select c From Course c where name like '% practice'"),
         }
 )
 @Cacheable
