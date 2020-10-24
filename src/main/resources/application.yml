@@ -9,6 +9,38 @@ spring:
         format_sql: true
         connection:
           isolation: 2
+        cache:
+          use_second_level_cache: true # Enable second level cache
+          region:
+            factory_class: org.hibernate.cache.ehcache.internal.EhcacheRegionFactory # Specify the caching framework - EhCache
+
+            # curl http://localhost:8080/courses/10001
+
+            # first time
+            # 109214 nanoseconds spent acquiring 1 JDBC connections;
+            # 0 nanoseconds spent releasing 0 JDBC connections;
+            # 1912996 nanoseconds spent preparing 2 JDBC statements;
+            # 387343 nanoseconds spent executing 2 JDBC statements;
+            # 0 nanoseconds spent executing 0 JDBC batches;
+            # 1471101 nanoseconds spent performing 1 L2C puts;
+            # 0 nanoseconds spent performing 0 L2C hits;
+            # 631281 nanoseconds spent performing 1 L2C misses;
+
+            # second time(same course details are retrieved from the cache
+            # 46280 nanoseconds spent acquiring 1 JDBC connections;
+            # 0 nanoseconds spent releasing 0 JDBC connections;
+            # 20068 nanoseconds spent preparing 1 JDBC statements;
+            # 101592 nanoseconds spent executing 1 JDBC statements;
+            # 0 nanoseconds spent executing 0 JDBC batches;
+            # 0 nanoseconds spent performing 0 L2C puts;
+            # 31983 nanoseconds spent performing 1 L2C hits;
+            # 0 nanoseconds spent performing 0 L2C misses;
+
+      javax: # javax/persistence/SharedCacheMode.java
+        persistence:
+          sharedCache:
+            mode: ENABLE_SELECTIVE # Only cache what I tell to cache
+
     show-sql: true
   datasource:
     url: jdbc:h2:mem:testdb
@@ -21,3 +53,6 @@ logging:
     org:
       hibernate:
         type: trace
+    net:
+      sf:
+        ehcache: debug
