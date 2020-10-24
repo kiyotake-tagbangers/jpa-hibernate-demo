@@ -1,6 +1,6 @@
-INSERT INTO course(id, name, created_date, last_updated_date) VALUES(10001, 'JPA exercise', sysdate(), sysdate());
-INSERT INTO course(id, name, created_date, last_updated_date) VALUES(10002, 'Spring practice', sysdate(), sysdate());
-INSERT INTO course(id, name, created_date, last_updated_date) VALUES(10003, 'Spring Boot practice', sysdate(), sysdate());
+INSERT INTO course(id, name, created_date, last_updated_date, is_deleted) VALUES(10001, 'JPA exercise', sysdate(), sysdate(),false);
+INSERT INTO course(id, name, created_date, last_updated_date, is_deleted) VALUES(10002, 'Spring practice', sysdate(), sysdate(),false);
+INSERT INTO course(id, name, created_date, last_updated_date, is_deleted) VALUES(10003, 'Spring Boot practice', sysdate(), sysdate(),false);
 
 --INSERT INTO course(id, name, created_date, last_updated_date) VALUES(10004, 'Dummy1', sysdate(), sysdate());
 --INSERT INTO course(id, name, created_date, last_updated_date) VALUES(10005, 'Dummy2', sysdate(), sysdate());
