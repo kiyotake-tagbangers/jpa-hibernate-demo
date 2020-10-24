@@ -26,9 +26,9 @@ INSERT INTO student(id, name, passport_id) VALUES(20003,'Sato', 30003);
 -- 20002	Tanaka	30002	30002	B123456
 -- 20003	Sato	30003	30003	C123456
 
-INSERT INTO review(id, rating, description, course_id) VALUES(40001,'5','Great Course', 10001);
-INSERT INTO review(id, rating, description, course_id) VALUES(40002,'4','Wonderful Course', 10001);
-INSERT INTO review(id, rating, description, course_id) VALUES(40003,'3 ','Awesome Course', 10003);
+INSERT INTO review(id, rating, description, course_id) VALUES(40001,'FIVE','Great Course', 10001);
+INSERT INTO review(id, rating, description, course_id) VALUES(40002,'FOUR','Wonderful Course', 10001);
+INSERT INTO review(id, rating, description, course_id) VALUES(40003,'FIVE','Awesome Course', 10003);
 -- SELECT * FROM review, course WHERE course.id = review.course_id;
 -- ID  	DESCRIPTION  	RATING  	COURSE_ID  	ID  	CREATED_DATE  	LAST_UPDATED_DATE  	NAME
 -- 40001	Great Course	5	10001	10001	2020-10-16 00:00:00	2020-10-16 00:00:00	JPA practice

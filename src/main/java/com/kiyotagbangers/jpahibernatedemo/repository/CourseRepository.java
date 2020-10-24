@@ -2,6 +2,7 @@ package com.kiyotagbangers.jpahibernatedemo.repository;
 
 import com.kiyotagbangers.jpahibernatedemo.entity.Course;
 import com.kiyotagbangers.jpahibernatedemo.entity.Review;
+import com.kiyotagbangers.jpahibernatedemo.entity.ReviewRating;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,8 +74,8 @@ public class CourseRepository {
         Course course = findById(10003L);
         logger.info("course.getReviews() -> {}", course.getReviews());
 
-        Review review1 = new Review("5", "Great Hands-on");
-        Review review2 = new Review("5", "Hotsoff");
+        Review review1 = new Review(ReviewRating.FIVE, "Great Hands-on");
+        Review review2 = new Review(ReviewRating.FIVE, "Hotsoff");
 
         course.addReviews(review1);
         review1.setCourse(course);
