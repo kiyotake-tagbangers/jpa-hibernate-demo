@@ -1,6 +1,7 @@
 package com.kiyotagbangers.jpahibernatedemo.repository;
 
 import com.kiyotagbangers.jpahibernatedemo.JpaHibernateDemoApplication;
+import com.kiyotagbangers.jpahibernatedemo.entity.Address;
 import com.kiyotagbangers.jpahibernatedemo.entity.Passport;
 import com.kiyotagbangers.jpahibernatedemo.entity.Student;
 import org.junit.jupiter.api.Test;
@@ -32,6 +33,16 @@ class StudentRepositoryTest {
         logger.info("student -> {}", student);
 
         // If Student passport field fetch strategy is LAZY and @Transactional is comment-out, LazyInitializationException happened. Because we are not having any transaction
+        logger.info("passport -> {}", student.getPassport());
+    }
+
+    @Test
+    @Transactional // entire test is within a transaction
+    void setAddressDetails() {
+        Student student = em.find(Student.class, 20001L);
+        student.setAddress(new Address("101", "some street", "Osaka"));
+        em.flush(); // this update would be pushed to the database
+        logger.info("student -> {}", student);
         logger.info("passport -> {}", student.getPassport());
     }
 

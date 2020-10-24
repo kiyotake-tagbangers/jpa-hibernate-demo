@@ -17,6 +17,20 @@ public class Student {
     @OneToOne(fetch = FetchType.LAZY)
     private Passport passport;
 
+    // want to separate class because the class is used in other places
+    // @OneToOne
+    @Embedded
+    private Address address;
+    //     create table student (
+    //       id bigint not null,
+    //        city varchar(255),
+    //        line1 varchar(255),
+    //        line2 varchar(255),
+    //        name varchar(255) not null,
+    //        passport_id bigint,
+    //        primary key (id)
+    //    )
+
     @ManyToMany
     @JoinTable(name = "STUDENT_COURSE",
             joinColumns = @JoinColumn(name = "STUDENT_ID"),
@@ -72,6 +86,14 @@ public class Student {
 
     public void addCourses(Course courses) {
         this.courses.add(courses);
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     @Override
