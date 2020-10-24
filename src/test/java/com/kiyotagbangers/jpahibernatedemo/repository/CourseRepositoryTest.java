@@ -3,7 +3,6 @@ package com.kiyotagbangers.jpahibernatedemo.repository;
 import com.kiyotagbangers.jpahibernatedemo.JpaHibernateDemoApplication;
 import com.kiyotagbangers.jpahibernatedemo.entity.Course;
 import com.kiyotagbangers.jpahibernatedemo.entity.Review;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 @SpringBootTest(classes = JpaHibernateDemoApplication.class)
 class CourseRepositoryTest {

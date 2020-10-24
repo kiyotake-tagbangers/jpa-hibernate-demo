@@ -1,9 +1,5 @@
 package com.kiyotagbangers.jpahibernatedemo;
 
-import com.kiyotagbangers.jpahibernatedemo.entity.Course;
-import com.kiyotagbangers.jpahibernatedemo.entity.FullTimeEmployee;
-import com.kiyotagbangers.jpahibernatedemo.entity.PartTimeEmployee;
-import com.kiyotagbangers.jpahibernatedemo.entity.Student;
 import com.kiyotagbangers.jpahibernatedemo.repository.CourseRepository;
 import com.kiyotagbangers.jpahibernatedemo.repository.EmployeeRepository;
 import com.kiyotagbangers.jpahibernatedemo.repository.StudentRepository;
@@ -13,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.math.BigDecimal;
 
 @SpringBootApplication
 public class JpaHibernateDemoApplication implements CommandLineRunner {
