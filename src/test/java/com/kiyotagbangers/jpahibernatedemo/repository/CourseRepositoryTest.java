@@ -150,4 +150,24 @@ class CourseRepositoryTest {
         //        review0_.id=?
         logger.info("{}", review.getCourse());
     }
+
+    /**
+     * First level cached is the boundary of the transaction
+     */
+    @Test
+    @Transactional // if this comment-out select query execute 2 times
+    void findById_firstLevelCacheDemo() {
+        Course course = repository.findById(10001L);
+        logger.info("First Course Retrieved {}", course);
+
+        Course course1 = repository.findById(10001L);
+        logger.info("First Course Retrieved again {}", course1);
+
+        // 2020-10-24 18:18:16.060  INFO 2622 --- [           main] c.k.j.repository.CourseRepositoryTest    : First Course Retrieved Course{name='JPA exercise'}
+        // You don't see any query because of within the scope of transaction and within a persistence context the data for the entities is cached
+        //2020-10-24 18:18:16.063  INFO 2622 --- [           main] c.k.j.repository.CourseRepositoryTest    : First Course Retrieved again Course{name='JPA exercise'}
+
+        assertEquals("JPA exercise", course.getName());
+        assertEquals("JPA exercise", course1.getName());
+    }
 }
